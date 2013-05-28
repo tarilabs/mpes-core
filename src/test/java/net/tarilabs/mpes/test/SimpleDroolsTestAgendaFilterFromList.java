@@ -17,15 +17,15 @@ public class SimpleDroolsTestAgendaFilterFromList implements AgendaFilter {
 
 	@Override
 	public boolean accept(Activation activation) {
-		System.out.print("You are asking me if to activate rule "+activation.getRule().getName());
+		System.out.print("You are asking me if to activate rule \""+activation.getRule().getName()+"\"");
 		for (String s : simpleRuleFilters) {
 			if (activation.getRule().getName().equals(s)) {
 				// the Activation matches the filter I wanted to activate
-				System.out.println("YES.");
+				System.out.println(" --> YES.");
 				return true;
 			}
 		}
-		System.out.println("NO.");
+		System.out.println(" --> NO.");
 		return false;
 	}
 

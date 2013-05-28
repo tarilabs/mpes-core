@@ -1,15 +1,19 @@
 package net.tarilabs.mpes.test;
 
 import org.drools.KnowledgeBase;
+import org.drools.KnowledgeBaseConfiguration;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
 import org.drools.builder.KnowledgeBuilderError;
 import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
+import org.drools.conf.EventProcessingOption;
 import org.drools.io.ResourceFactory;
 import org.drools.logger.KnowledgeRuntimeLogger;
 import org.drools.logger.KnowledgeRuntimeLoggerFactory;
+import org.drools.runtime.KnowledgeSessionConfiguration;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.conf.ClockTypeOption;
 import org.drools.runtime.rule.AgendaFilter;
 import org.junit.After;
 import org.junit.Before;
@@ -47,15 +51,20 @@ public class SimpleDroolsTestSupport {
 			}
 			throw new IllegalArgumentException("KnowledgeBuilder error(s):\n"+sb.toString());
 		}
-		kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		
+		KnowledgeBaseConfiguration kbaseConf = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+		kbaseConf.setOption(EventProcessingOption.STREAM);
+		kbase = KnowledgeBaseFactory.newKnowledgeBase(kbaseConf);
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		
 		AgendaFilter af = null;
 		if (simpleDroolsTestWatcher.getSimpleRuleFilters() != null) {
 			af = new SimpleDroolsTestAgendaFilterFromList(simpleDroolsTestWatcher.getSimpleRuleFilters());
 		}
-		
-		StatefulKnowledgeSession theTrueKS = kbase.newStatefulKnowledgeSession();
+
+		KnowledgeSessionConfiguration ksConfig = KnowledgeBaseFactory.newKnowledgeSessionConfiguration();
+		ksConfig.setOption( ClockTypeOption.get("pseudo") );
+		StatefulKnowledgeSession theTrueKS = kbase.newStatefulKnowledgeSession(ksConfig, null);
 		ksession = SimpleDroolsTestStatefulKSProxy.newInstance(theTrueKS, af);
 		
 		krlogger = KnowledgeRuntimeLoggerFactory.newFileLogger(theTrueKS, simpleDroolsTestWatcher.getTheMethod());

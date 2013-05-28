@@ -28,6 +28,13 @@
 		<artifactId>camel-xbeeapi</artifactId>
 		<version>0.1</version>
 	</dependency>
+	
+	<dependency>
+	<groupId>javax</groupId>
+	<artifactId>javaee-api</artifactId>
+	<version>6.0</version>
+	<scope>provided</scope>
+</dependency>
 
 	<dependency>
 		<groupId>junit</groupId>
@@ -35,6 +42,12 @@
 		<version>4.10</version>
 		<scope>test</scope>
 	</dependency>
+		<dependency>
+<groupId>org.apache.geronimo.ext.tomcat</groupId>
+<artifactId>catalina</artifactId>
+<version>7.0.19.1</version>
+<scope>test</scope>
+</dependency>
 
 	<dependency>
 		<groupId>org.drools</groupId>
@@ -46,6 +59,31 @@
 		<artifactId>drools-compiler</artifactId>
 		<version>${drools.version}</version>
 	</dependency>
+	
+			<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>fluent-hc</artifactId>
+			<version>4.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.restfb</groupId>
+			<artifactId>restfb</artifactId>
+			<version>1.6.12</version>
+		</dependency>
+		
+		
+	<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-ejb</artifactId>
+			      <version>2.10.3</version>
+		</dependency>
+	
   </dependencies>
 	<build>
 		<finalName>mpes-core</finalName>
