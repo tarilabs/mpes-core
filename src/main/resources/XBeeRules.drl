@@ -120,6 +120,8 @@ then
 end
 
 /**
+ * TODO rewrite this rule be based on DOCKED and UNDOCKED as CEP Drools Event.
+ *
  * Home Toothbrush Session
  * Detect a session of use for the Home Toothbrush when a DOCKED follows an UNDOCKED endured for at least 30sec.
  */
@@ -136,7 +138,7 @@ then
 	long secs = (millis/1000) % 60;
 	long oscillations = (long) ( (7600.0/60/1000) * millis );
 	MpesSentence ms = new MpesSentence("Home Toothbrush", 
-			"Total time: "
+			"I just used my toothbrush! Total time: "
 			+( (mins>0)?mins+"m":"" )
 			+secs+"s "
 			+"Oscillations: "+oscillations);

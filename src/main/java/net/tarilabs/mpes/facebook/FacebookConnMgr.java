@@ -40,10 +40,11 @@ public class FacebookConnMgr {
 		
 		FacebookType publishMessageResponse = facebookClient.publish("me/feed", FacebookType.class,
 				    Parameter.with("message", ms.getMessage()),
+				    Parameter.with("picture", "http://www.tarilabs.net/mpes/img/toothbrush.png"),
 				    Parameter.with("link", "http://www.tarilabs.net"),
 				    Parameter.with("name", "MPES"),
 				    Parameter.with("caption", "Mobile & Pervasive Expert System"),
-				    Parameter.with("description", "Coming soon.")
+				    Parameter.with("description", "I'm crafting an Artifical Intelligent system to keep track of some activities and motivate me towards some commitments. More info coming soon.")
 				    );
 
 		logger.info("Published message ID: " + publishMessageResponse.getId());

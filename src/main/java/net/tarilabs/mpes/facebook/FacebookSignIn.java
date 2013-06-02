@@ -19,7 +19,7 @@ public class FacebookSignIn extends HttpServlet {
 		String client_id = System.getProperty("net.tarilabs.mpes.facebook.client_id");
 		response.sendRedirect("https://graph.facebook.com/oauth/authorize?client_id="
 				+client_id
-				+"&redirect_uri=http://localhost:8080/mpes-core/FacebookCallback&scope=publish_stream");
+				+"&redirect_uri=http://www.tarilabs.net/mpes/facebook.aspx&scope=publish_stream");
 	}
 
 }

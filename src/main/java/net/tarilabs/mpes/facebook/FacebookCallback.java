@@ -36,13 +36,16 @@ public class FacebookCallback extends HttpServlet {
 		String res = 
 				Request.Get("https://graph.facebook.com/oauth/access_token?"
 						+"client_id="+client_id+"&"
-						+"redirect_uri=http://localhost:8080/mpes-core/FacebookCallback&"
+						+"redirect_uri=http://www.tarilabs.net/mpes/facebook.aspx&"
 						+"client_secret="+client_secret+"&"
 						+"code="+code).execute().returnContent().toString();
 
 		String left = res.substring(res.indexOf("=")+1, res.length());
 		String access_token = left.substring(0, left.indexOf("&"));
 		logger.info(access_token);
+		
+		// TODO should check with facebook graph that the access_token is indeed valid, a last step ad per docs on FB.
+		
 		fbConnMgr.setAccess_token(access_token);
 		response.sendRedirect(request.getContextPath()+"/index.xhtml");
 
